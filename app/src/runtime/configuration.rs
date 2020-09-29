@@ -1,7 +1,15 @@
 pub struct Configuration {
-    // todo
+    pub is_host: bool,
+    pub client_port: u16,
+    pub host_port: u16,
 }
 
 impl Configuration {
-    // todo
+    pub fn new() -> Configuration {
+        Configuration {
+            is_host: false,
+            client_port: 4791,
+            host_port: 4792,
+        }
+    }
 }
