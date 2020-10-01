@@ -1,18 +1,27 @@
 use std::io::prelude::*;
-use std::net::TcpListener;
-use std::net::TcpStream;
+use std::net::{TcpListener, TcpStream};
+
+pub trait Connection {
+    fn send(&self, message: String) -> Result<(), Box<dyn std::error::Error>>;
+}
 
 pub struct Server {
     pub is_hosting: bool,
+    listener: Option<TcpListener>,
+    stream: Option<TcpStream>,
 }
 
 impl Server {
-    pub fn new(&self) -> Server{
-        Server {}
-    }
+    pub fn open_connection(address: String) -> Result<Server, Box<dyn std::error::Error>> {
+        let listener = TcpListener::bind(address)?;
+        
+        let connection = Server {
+            is_hosting: false,
+            listener: Some(listener),
+            stream: None,
+        };
 
-    pub fn start(&self) {
-        // todo
+        Ok(connection)
     }
 }
 
@@ -21,10 +30,6 @@ pub struct Client {
 }
 
 impl Client {
-    pub fm new(&self) -> Client {
-        Client {}
-    }
-
     pub fn connect (&self, address: String) {
         // todo
     }

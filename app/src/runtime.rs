@@ -7,7 +7,7 @@ use std::time::{Duration, SystemTime};
 use std::thread::sleep;
 
 mod configuration;
-// mod network;
+mod network;
 
 pub struct Runtime {
     canvas_width: u16,
